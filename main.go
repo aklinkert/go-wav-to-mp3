@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os/exec"
-
-	"os"
-	"sync"
 	"io/ioutil"
-	"strings"
+	"os"
+	"os/exec"
 	"path"
+	"strings"
+	"sync"
 )
 
 func main() {
