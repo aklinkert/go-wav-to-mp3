@@ -8,6 +8,7 @@ import (
 	"sync"
 	"io/ioutil"
 	"strings"
+	"path"
 )
 
 func main() {
@@ -35,15 +36,18 @@ func main() {
 			continue
 		}
 
-		if _, err := os.Stat(file.Name()); err != nil {
+		filePath := path.Join(dir, file.Name())
+		if _, err := os.Stat(filePath); err != nil {
 			fmt.Printf("File '%s' does not exist. \n", file.Name())
+			continue
 		}
 
-		if _, err := os.Stat(strings.Replace(file.Name(), ".wav", ".mp3", 1)); err == nil {
+		if _, err := os.Stat(strings.Replace(filePath, ".wav", ".mp3", 1)); err == nil {
 			fmt.Printf("There is already a .mp3 file for %s \n", file.Name())
+			continue
 		}
 
-		filesToConvert = append(filesToConvert, file.Name())
+		filesToConvert = append(filesToConvert, filePath)
 		fmt.Printf("Added '%s' to queue. \n", file.Name())
 	}
 
